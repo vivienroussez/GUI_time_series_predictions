@@ -50,6 +50,7 @@ ui <- navbarPage("AutoTS graphical interface",
                                           selected = "best"),
                               numericInput("test_length","Number of obs for test data",value = 12),
                               numericInput("pred_ahead","Number of periods for prediction",value=12),
+                              actionButton("compute","Compute the prediction !"),
                               downloadButton("downloadData", "Download predictions")
                             )
                      ),
@@ -86,12 +87,12 @@ server <- function(input, output) {
     selectInput("var","Variable to predict",names(dat()),selected = names(dat())[2])
   })
 
-  train <- reactive({
+  train <- eventReactive(input$compute,{
     validate(need(!is.null(dat()),"Waiting for data"))
     getBestModel(dat()[,input$date],dat()[,input$var],freq = input$freq,graph = F,n_test = input$test_length)
   })
 
-  pred <- reactive({
+  pred <- eventReactive(input$compute,{
     validate(need(!is.null(dat()),"Waiting for data"))
     data_ts <- prepare.ts(dat()[,input$date],dat()[,input$var],freq = input$freq)
     if (input$model_choice=="best") res <- my.predictions(data_ts,train()$best,n_pred = input$pred_ahead)

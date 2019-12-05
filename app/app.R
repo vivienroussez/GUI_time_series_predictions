@@ -23,11 +23,11 @@ library(shinycssloaders)
 # ex <- data.frame(date=dates,var1=ts1,var2=ts2)
 
 ui <- navbarPage("AutoTS graphical interface",
-                 tabPanel("Presentation - what do I need ?",
+                 tabPanel("Introduction",
                           fluidPage(
                             includeMarkdown("Instructions.md")
                           )),
-                 tabPanel("Prediction for single series",
+                 tabPanel("Time series predictions",
                    fluidRow(
                      column(4,
                             wellPanel(

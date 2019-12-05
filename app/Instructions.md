@@ -10,4 +10,4 @@ Please see the documentation of the package (link above) for more information ab
 This interface allows you to check quickly whether the implemented algorithms may fit your data or not.
 
 ## Expected shape of the CSV file 
-![](www/CSV_example.png)
+![](www/data_ex.png)
